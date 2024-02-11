@@ -29,8 +29,15 @@ export default function GameModal({ isOpen, handleCloseScores, selectedID, selec
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+   
+    
+    const handleCloseModal = () => {
+        handleCloseScores();
+    };
+
+    console.log(value)
     return (
-        <Modal open={isOpen} onClose={handleCloseScores}>
+        <Modal open={isOpen} onClose={handleCloseModal}>
             <Box
                 sx={{
                     position: 'absolute',
@@ -67,6 +74,7 @@ export default function GameModal({ isOpen, handleCloseScores, selectedID, selec
                                     <Tab label={"Player Stats"} value="2" />
                                 </TabList>
                             </Box>
+                            
                             <TabPanel value="1">
                                 {selectedTeamScores === undefined ? (
                                     <Typography variant="body1">
@@ -80,9 +88,15 @@ export default function GameModal({ isOpen, handleCloseScores, selectedID, selec
                             </TabPanel>
 
                             <TabPanel value="2">
+                            {selectedTeamScores === undefined ? (
+                                    <Typography variant="body1">
+                                        Game has not started.
+                                    </Typography>
+                                ) : (
                                 <PlayerScoresTable
                                     selectedPlayerScores={selectedPlayerScores}
                                 />
+                                )}
                             </TabPanel>
                         </TabContext>
                     </Box>
