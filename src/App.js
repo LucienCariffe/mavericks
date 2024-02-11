@@ -1,14 +1,17 @@
 
 import './App.css';
 import Header from './components/header';
-import { createMuiTheme, ThemeProvider } from '@mui/material';
+import {
+  createMuiTheme,
+  ThemeProvider
+} from '@mui/material';
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main:'#0064B1'
+      main: '#0064B1'
     },
-    secondary:  {
+    secondary: {
       main: '#0064B1'
     }
   },
@@ -36,11 +39,11 @@ const theme = createMuiTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-    <div className="App">
-      <header >
-       <Header/>
-      </header>
-    </div>
+      <div className="App">
+        <header >
+          <Header />
+        </header>
+      </div>
     </ThemeProvider>
   );
 }
