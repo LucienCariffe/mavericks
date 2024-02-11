@@ -1,21 +1,24 @@
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-
-import Paper from '@mui/material/Paper';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Link,
+  Tooltip,
+  Paper
+} from '@mui/material';
 import { TableVirtuoso } from 'react-virtuoso';
 
 
 const columns = [
   { width: 200, label: 'Name', dataKey: 'name' },
+  { width: 120, label: 'Jersey Number', dataKey: 'jerseyNum', numeric: true },
   { width: 120, label: 'Height (in)', dataKey: 'height', numeric: true },
   { width: 120, label: 'Weight (lbs)', dataKey: 'weight', numeric: true },
   { width: 120, label: 'Position', dataKey: 'position', numeric: true },
-  { width: 120, label: 'Jersey Number', dataKey: 'jerseyNum', numeric: true },
   { width: 120, label: 'Age', dataKey: 'age', numeric: true },
   { width: 120, label: 'Season', dataKey: 'season', numeric: true },
   { width: 120, label: 'Games Played', dataKey: 'gp', numeric: true },
@@ -43,7 +46,7 @@ const columns = [
 
 const VirtuosoTableComponents = {
   Scroller: React.forwardRef(function ScrollerComponent(props, ref) {
-    return <TableContainer  component={Paper} {...props} ref={ref} />;
+    return <TableContainer component={Paper} {...props} ref={ref} />;
   }),
   Table: function TableComponent(props) {
     return <Table {...props} sx={{ borderCollapse: 'separate', tableLayout: 'fixed' }} />;
@@ -80,22 +83,34 @@ function fixedHeaderContent() {
 function rowContent(_index, player) {
   return (
     <React.Fragment>
-      {columns.map((column) => (
-        <TableCell
-          key={column.dataKey}
-          align={column.numeric || false ? 'right' : 'left'}
-        >
-          {player[column.dataKey]}
-        </TableCell>
-      ))}
+      {columns.map((column) => {
+
+        return (
+
+          <TableCell
+            key={column.dataKey}
+            align={column.numeric || false ? 'right' : 'left'}
+          >
+            {column.dataKey === 'name' ? (
+              <Tooltip title={<img src={player.photoUrl} alt={player.name} style={{ width: '63px', height: '50px' }} />} placement="right">
+                <Link underline='always'>
+                  {player[column.dataKey]}
+                </Link>
+              </Tooltip>
+            ) : (
+              player[column.dataKey]
+            )}
+          </TableCell>
+        )
+      })}
     </React.Fragment>
   );
 }
 
-export default function PlayerStatsTable({selectedTeamPlayer}) {
-    console.log(selectedTeamPlayer)
+export default function PlayerStatsTable({ selectedTeamPlayer }) {
+
   return (
-    <Paper style={{ height: 550, width: '100%' }}>
+    <Paper style={{ height: 670, width: '100%' }}>
       <TableVirtuoso
         data={selectedTeamPlayer}
         components={VirtuosoTableComponents}

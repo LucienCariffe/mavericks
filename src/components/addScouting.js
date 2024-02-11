@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { Modal, Box, Typography, TextField, Button } from '@mui/material';
-import gameData from './gameData.json';
+import {
+    Modal,
+    Box,
+    Typography,
+    TextField,
+    Button
+} from '@mui/material';
 
 
-export default function AddScouting({ isOpen, handleCloseAdd, selectedID }) {
 
-  
+export default function AddScouting({ isOpen, handleCloseAdd, gameID, addScoutingReport }) {
 
     const [scoutingReport, setScoutingReport] = useState({
-        nbaGameId: selectedID,
+        nbaGameId: gameID,
         scout: '',
         nbaId: '',
         name: '',
@@ -22,14 +26,8 @@ export default function AddScouting({ isOpen, handleCloseAdd, selectedID }) {
         report: ''
     });
 
-
-
-
-// Add the new scouting report to the existing data
-gameData.scoutingReports.push(scoutingReport);
     const handleSubmit = (event) => {
         event.preventDefault();
-        // Validate fields
         let isValid = true;
         const errors = {
             scout: '',
@@ -59,12 +57,8 @@ gameData.scoutingReports.push(scoutingReport);
         }
 
         if (isValid) {
-            // Submit form
-            
-            gameData.scoutingReports.push(scoutingReport);
-            console.log(gameData.scoutingReports)
-            console.log('Form submitted');
-            
+            addScoutingReport(scoutingReport)
+
             handleCloseAdd();
         } else {
             setError(errors);
@@ -79,9 +73,9 @@ gameData.scoutingReports.push(scoutingReport);
                     top: '50%',
                     left: '50%',
                     transform: 'translate(-50%, -50%)',
-                    width: '90%',
-                    height: '90%',
-                    //overflow: 'auto',
+                    width: '80%',
+                    height: '80%',
+                    overflow: 'auto',
                     bgcolor: 'background.paper',
                     boxShadow: 24,
                     p: 4,
@@ -96,7 +90,7 @@ gameData.scoutingReports.push(scoutingReport);
                         variant="outlined"
                         fullWidth
                         disabled
-                        value={selectedID} 
+                        value={gameID}
                         sx={{ mb: 2 }}
                     />
                     <TextField

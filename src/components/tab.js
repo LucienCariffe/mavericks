@@ -1,12 +1,18 @@
 'use client'
 
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Tab from '@mui/material/Tab';
-import TabContext from '@mui/lab/TabContext';
-import TabList from '@mui/lab/TabList';
-import TabPanel from '@mui/lab/TabPanel';
+import {
+  Box,
+  Tab
+} from '@mui/material';
+import {
+  TabContext,
+  TabList,
+  TabPanel
+} from '@mui/lab';
 import DenseTable from './table';
+
+import StandingsTabs from './standingsTab';
 
 export default function BasicTabs() {
   const [value, setValue] = React.useState('1');
@@ -22,12 +28,12 @@ export default function BasicTabs() {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label={"game"} value="1" />
             <Tab label={"standings"} value="2" />
-            
+
           </TabList>
         </Box>
-        <TabPanel value="1"><DenseTable/></TabPanel>
-        <TabPanel value="2">Standings</TabPanel>
-        
+        <TabPanel value="1"><DenseTable /></TabPanel>
+        <TabPanel value="2"><StandingsTabs /></TabPanel>
+
       </TabContext>
     </Box>
   );

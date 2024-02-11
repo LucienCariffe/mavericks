@@ -1,19 +1,31 @@
 
 import React from 'react';
 import BasicTabs from './tab';
-import { Box } from '@mui/material';
+import {
+  Box,
+  Toolbar,
+  AppBar
+} from '@mui/material';
 
 const Header = () => {
-
   return (
-    <Box>
-    <header className="bg-blue-500 text-white p-10">
-      { }
-    
-    </header>
-    <BasicTabs/>
-    </Box>
-    
+    <>
+      <AppBar position="static">
+        <Toolbar>
+
+          <img
+            src="https://cdn.nba.com/logos/nba/1610612742/primary/L/logo.svg"
+            alt="mavericks logo"
+            style={{ maxHeight: '70px', marginRight: '10px' }} // Adjust the styling here
+          />
+
+        </Toolbar>
+      </AppBar>
+      <Box>
+        {/* Assuming BasicTabs is another component */}
+        <BasicTabs />
+      </Box>
+    </>
   );
 };
 
